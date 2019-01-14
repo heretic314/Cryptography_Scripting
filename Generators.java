@@ -1,0 +1,40 @@
+import java.math.BigInteger;
+import java.util.Scanner;
+public class Generators
+{
+	public static void main (String args[]) 
+	{
+		@SuppressWarnings("resource")
+		Scanner in = new Scanner(System.in);
+		
+		System.out.println("Enter a number");
+		BigInteger a = in.nextBigInteger();
+		BigInteger b = SqRtN(a);
+		BigInteger c =  b.multiply(b);
+		BigInteger d = a.subtract(c);
+		System.out.println("The generator is "+d);
+		}
+    private static BigInteger SqRtN(BigInteger N)
+    {
+      BigInteger G = new BigInteger((N.shiftRight((N.bitLength() + 1) / 2)).toString());
+      BigInteger LastG = null;
+      BigInteger One = new BigInteger("1");
+      while (true)
+      {
+        LastG = G;
+        G = N.divide(G).add(G).shiftRight(1);
+        int i = G.compareTo(LastG);
+        if (i == 0) return G;
+        if (i < 0)
+        {
+          if (LastG.subtract(G).compareTo(One) == 0)
+            if (G.multiply(G).compareTo(N) < 0 && LastG.multiply(LastG).compareTo(N) > 0) return G;
+        }
+        else
+        {
+          if (G.subtract(LastG).compareTo(One) == 0)
+            if (LastG.multiply(LastG).compareTo(N) < 0 && G.multiply(G).compareTo(N) > 0) return LastG;
+        }
+      }
+    }
+}
