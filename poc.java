@@ -1,8 +1,8 @@
 import java.math.BigInteger;
 import java.util.Scanner;
-public class poc 
+public class poc
 {
-public static void main(String[] args) 
+public static void main(String[] args)
 {
 	BigInteger a=new BigInteger("17");
 	BigInteger b=new BigInteger("9");
@@ -48,13 +48,13 @@ public static void main(String[] args)
 			System.out.println("P"+c+" ("+x3+","+y3+")");
 			}
 		}
-//Fish algorithm	
-public static BigInteger f(BigInteger n, BigInteger addition, BigInteger multiplication, BigInteger m) 
+//Fish algorithm
+public static BigInteger f(BigInteger n, BigInteger addition, BigInteger multiplication, BigInteger m)
 {
   BigInteger q     = new BigInteger("0");
-	BigInteger p  = new BigInteger("1");    
-	BigInteger r = m;  
-	BigInteger newr = n;    
+	BigInteger p  = new BigInteger("1");
+	BigInteger r = m;
+	BigInteger newr = n;
 	while (!(newr.equals(BigInteger.ZERO)))
   {
   	BigInteger quotient = r.divide(newr);
@@ -65,14 +65,14 @@ public static BigInteger f(BigInteger n, BigInteger addition, BigInteger multipl
       p=q.subtract(quotient.multiply(p));
       q=temp;
   }
-  
+
   if (r.compareTo(BigInteger.ONE) == 1)
      return(BigInteger.ZERO);
   else
   	{
-  		if (q.compareTo(BigInteger.ZERO) == -1) q.add(m); 
+  		if (q.compareTo(BigInteger.ZERO) == -1) q.add(m);
   		BigInteger answer =q.multiply(multiplication.subtract(addition.mod(m).add(m))).mod(m);
   	    return(answer);
-  	}   
+  	}
   }
 }
